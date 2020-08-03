@@ -1,0 +1,16 @@
+{
+  "name": "nodebasic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Mikun Hatsune",
+  "license": "ISC"
+}
