@@ -1,0 +1,30 @@
+<nav>
+    <div class="nav-wrapper">
+        <a href="/" class="brand-logo">Приложение Игр!</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            {{#if isHome}}
+            <li class="active"><a href="/">Главная</a></li>
+            {{else}}
+            <li><a href="/">Главная</a></li>
+            {{/if}}
+
+            {{#if isAuth}}
+                {{#if isAdmin}}
+                    {{#if isAdd}}
+                    <li class="active"><a href="/add">Добавить игру</a></li>
+                    {{else}}
+                    <li><a href="/add">Добавить игру</a></li>
+                    {{/if}}
+                {{/if}}
+
+                <li><a href="/auth/logout">Выйти</a></li>
+            {{else}}
+                {{#if isLogin}}
+                <li class="active"><a href="/auth/login#login">Войти</a></li>
+                {{else}}
+                <li><a href="/auth/login#login">Войти</a></li>
+                {{/if}}
+        {{/if}}
+        </ul>
+    </div>
+</nav>
