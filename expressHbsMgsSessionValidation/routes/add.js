@@ -3,7 +3,6 @@ const { validationResult } = require('express-validator/check')
 const Course = require('../models/course')
 const auth = require('../middleware/auth')
 const { courseValidator } = require('../utils/validator')
-const { validationResult } = require('express-validator')
 const router = Router()
 
 router.get('/', auth, (req, res) => {
