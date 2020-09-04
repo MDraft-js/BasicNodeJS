@@ -11,3 +11,9 @@ exports.registerValidator = [
         return true;
     }).trim()
 ]
+
+exports.courseValidator = [
+    body('title').isLength({min: 3}).withMessage('Минимальная длинна названия 3 символа'),
+    body('price').isNumeric().withMessage('Введите корректную цену'),
+    body('img', 'Введите корректный URL картинки').isURL()
+]
