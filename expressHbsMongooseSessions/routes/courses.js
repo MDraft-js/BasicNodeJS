@@ -1,10 +1,12 @@
 const { Router } = require('express')
 const Course = require('../models/course')
 const auth = require('../middleware/auth')
+const owner = require('../middleware/owner')
 const router = Router()
 
 router.get('/', async (req, res) => {
-    const courses = await Course.find().lean().populate('userId', 'name, email')
+    const courses = await Course.find().lean()
+    courses.forEach(course => String(req.user._id) == String(course.userId) ? course['owner'] = true : course['owner'] = false)
 
     res.render('courses', {
         title: 'Все курсы',
@@ -22,7 +24,7 @@ router.get('/:id', async (req, res) => {
     })
 })
 
-router.get('/:id/edit', auth, async (req, res) => {
+router.get('/:id/edit', auth, owner, async (req, res) => {
     if (!req.query.allow) {
         return res.redirect('/')
     }
@@ -35,14 +37,14 @@ router.get('/:id/edit', auth, async (req, res) => {
     })
 })
 
-router.post('/edit', auth, async(req, res) => {
+router.post('/edit', auth, owner, async(req, res) => {
     const { id } = req.body;
     delete req.body.id;
     await Course.findByIdAndUpdate(id, req.body)
     res.redirect('/courses')
 })
 
-router.post('/delete', auth, async (req, res) => {
+router.post('/delete', auth, owner, async (req, res) => {
     try {
         await Course.findByIdAndDelete(req.body.id)
         res.redirect('/courses')

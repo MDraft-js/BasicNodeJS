@@ -16,7 +16,7 @@ function computePrice(courses) {
 }
 
 router.get('/', auth, async (req, res) => {
-    const user = await req.user.populate('cart.items.courseId', nam).execPopulate()
+    const user = await req.user.populate('cart.items.courseId').execPopulate()
     const courses = mapCartItems(user.cart)
 
     res.render('card', {

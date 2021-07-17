@@ -27,7 +27,7 @@ app.engine("hbs", exphbs({
 app.set("view engine", "hbs");
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extanded: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: "some secret value",
     resave: false,
@@ -39,8 +39,8 @@ app.use(session({
 }));
 app.use(flash())
 app.use(userMiddleware);
-app.use(varMiddleware);
 app.use(csrf());
+app.use(varMiddleware);
 
 
 app.use("/", homeRoutes);
